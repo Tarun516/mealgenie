@@ -67,9 +67,6 @@ export default function MealPlanDashboard() {
     mutation.mutate({ dietType, calories, allergies, cuisine, snacks });
   };
 
-  // Compute loading state (using "pending" for mutation status)
-  const isLoading = mutation.status === "pending";
-
   return (
     <div className="min-h-screen p-4 flex flex-col items-center">
       <h1 className="text-3xl mb-4">Meal Plan Generator</h1>
@@ -110,11 +107,14 @@ export default function MealPlanDashboard() {
               type="checkbox"
               checked={snacks}
               onChange={(e) => setSnacks(e.target.checked)}
-            />
-            {" "}Include Snacks
+            />{" "}
+            Include Snacks
           </label>
         </div>
-        <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded">
+        <button
+          type="submit"
+          className="w-full p-2 bg-blue-500 text-white rounded"
+        >
           Generate Meal Plan
         </button>
       </form>
@@ -126,9 +126,7 @@ export default function MealPlanDashboard() {
       )}
 
       {mutation.status === "error" && (
-        <div className="mt-4 text-red-500">
-          {mutation.error?.message}
-        </div>
+        <div className="mt-4 text-red-500">{mutation.error?.message}</div>
       )}
 
       {mutation.status === "success" && mutation.data.mealPlan && (
@@ -138,9 +136,15 @@ export default function MealPlanDashboard() {
               <h2 className="text-xl font-bold mb-2">{day}</h2>
               {meals.breakfast && (
                 <div className="mb-2">
-                  <div className="font-semibold">Breakfast: {meals.breakfast.name}</div>
-                  <div className="text-sm text-gray-700">{meals.breakfast.description}</div>
-                  <div className="text-xs text-gray-500">Calories: {meals.breakfast.calories}</div>
+                  <div className="font-semibold">
+                    Breakfast: {meals.breakfast.name}
+                  </div>
+                  <div className="text-sm text-gray-700">
+                    {meals.breakfast.description}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    Calories: {meals.breakfast.calories}
+                  </div>
                   {meals.breakfast.ingredients && (
                     <div className="text-xs text-gray-500">
                       Ingredients: {meals.breakfast.ingredients.join(", ")}
@@ -151,8 +155,12 @@ export default function MealPlanDashboard() {
               {meals.lunch && (
                 <div className="mb-2">
                   <div className="font-semibold">Lunch: {meals.lunch.name}</div>
-                  <div className="text-sm text-gray-700">{meals.lunch.description}</div>
-                  <div className="text-xs text-gray-500">Calories: {meals.lunch.calories}</div>
+                  <div className="text-sm text-gray-700">
+                    {meals.lunch.description}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    Calories: {meals.lunch.calories}
+                  </div>
                   {meals.lunch.ingredients && (
                     <div className="text-xs text-gray-500">
                       Ingredients: {meals.lunch.ingredients.join(", ")}
@@ -162,9 +170,15 @@ export default function MealPlanDashboard() {
               )}
               {meals.dinner && (
                 <div className="mb-2">
-                  <div className="font-semibold">Dinner: {meals.dinner.name}</div>
-                  <div className="text-sm text-gray-700">{meals.dinner.description}</div>
-                  <div className="text-xs text-gray-500">Calories: {meals.dinner.calories}</div>
+                  <div className="font-semibold">
+                    Dinner: {meals.dinner.name}
+                  </div>
+                  <div className="text-sm text-gray-700">
+                    {meals.dinner.description}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    Calories: {meals.dinner.calories}
+                  </div>
                   {meals.dinner.ingredients && (
                     <div className="text-xs text-gray-500">
                       Ingredients: {meals.dinner.ingredients.join(", ")}
@@ -177,9 +191,12 @@ export default function MealPlanDashboard() {
                   <div className="font-semibold">Snacks:</div>
                   {meals.snacks.map((snack, idx) => (
                     <div key={idx} className="text-sm text-gray-700">
-                      <span className="font-medium">{snack.name}</span> - {snack.description} ({snack.calories} calories)
+                      <span className="font-medium">{snack.name}</span> -{" "}
+                      {snack.description} ({snack.calories} calories)
                       {snack.ingredients && (
-                        <span className="text-xs text-gray-500">; Ingredients: {snack.ingredients.join(", ")}</span>
+                        <span className="text-xs text-gray-500">
+                          ; Ingredients: {snack.ingredients.join(", ")}
+                        </span>
                       )}
                     </div>
                   ))}
